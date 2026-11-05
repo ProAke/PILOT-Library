@@ -8,11 +8,15 @@
  * https://3000-<sandbox>.e2b.app while reviewing on a phone).
  */
 export const DEMO = {
-  /** Live preview (sandbox) baked in at build time; override per deploy. */
+  /**
+   * Fallback only — /demo re-encodes the QR with the visitor's own origin at
+   * runtime, so sandbox-preview rotation never leaves a dead QR behind.
+   * Set NEXT_PUBLIC_DEMO_URL to pin a public domain for a release build.
+   */
   url:
     process.env.NEXT_PUBLIC_DEMO_URL ??
     process.env.NEXT_PUBLIC_SITE_URL ??
-    "https://3000-iudurdmmaz8mhutdzo81h.e2b.app",
+    "https://pilot-library.vercel.app",
   /** Native shells that can be built from this repo */
   native: [
     {
