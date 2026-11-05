@@ -9,9 +9,25 @@
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint",
     "images": "python3 scripts/prepare-images.py",
-    "drive:list": "node scripts/sync-drive.mjs"
+    "drive:list": "node scripts/sync-drive.mjs",
+    "build:mobile": "node scripts/lib-catalog-json.build.mjs && node scripts/build-mobile.mjs",
+    "mobile:sync": "npm run build:mobile && npx cap sync",
+    "mobile:ios": "npx cap open ios",
+    "mobile:android": "npx cap open android",
+    "mobile:run:ios": "npx cap run ios",
+    "mobile:run:android": "npx cap run android",
+    "mobile:assets": "npx capacitor-assets generate --iconBackgroundColor '#121820' --splashBackgroundColor '#f7f5f1'",
+    "demo:qr": "node scripts/make-demo-qr.mjs"
   },
   "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/browser": "^8.0.5",
+    "@capacitor/core": "^8.6.0",
+    "@capacitor/haptics": "^8.0.2",
+    "@capacitor/ios": "^8.6.0",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4",
     "@fontsource-variable/inter": "^5.3.0",
     "@fontsource-variable/noto-sans-thai": "^5.3.0",
     "@fontsource-variable/space-grotesk": "^5.3.0",
@@ -21,9 +37,14 @@
     "react-dom": "19.2.0"
   },
   "devDependencies": {
+    "@capacitor/assets": "^4.0.0",
+    "@capacitor/cli": "^8.6.0",
     "@types/node": "^22.15.0",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "esbuild": "^0.28.2",
+    "qrcode": "^1.5.4",
     "typescript": "^5.8.3"
   }
 }

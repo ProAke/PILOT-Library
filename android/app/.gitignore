@@ -1,0 +1,5 @@
+/build/*
+!/build/.npmkeep
+
+# Web bundle copied by `npx cap sync` — regenerated from the Next static export
+/src/main/assets/public

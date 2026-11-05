@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { getLiveCatalog } from "@/lib/drive";
+import { safeSearchParams } from "@/lib/request-params";
 
 export const revalidate = 600;
+export const dynamic = "force-static";
 
 /**
  * GET /api/products
@@ -12,7 +14,7 @@ export const revalidate = 600;
  * GOOGLE_DRIVE_API_KEY is present, otherwise the bundled snapshot is used.
  */
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
+  const searchParams = safeSearchParams(request);
   const category = searchParams.get("category");
   const q = searchParams.get("q")?.trim().toLowerCase() ?? "";
 

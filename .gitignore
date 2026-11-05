@@ -9,3 +9,5 @@ build
 .vercel
 next-env.d.ts
 tsconfig.tsbuildinfo
+.build-stash
+lib/catalog-json.mjs

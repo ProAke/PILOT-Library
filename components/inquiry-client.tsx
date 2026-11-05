@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart, cartItemKey } from "@/components/cart-provider";
 import { formatPrice, lineInquiry } from "@/lib/format";
+import { openExternal } from "@/lib/native";
 import styles from "./inquiry-client.module.css";
 
 const PHONE = "0816455575";
@@ -128,17 +129,24 @@ export function InquiryClient() {
             )}
 
             <div className={styles.actions}>
-              <a
-                href={`https://line.me/R/oaMessage/${encodeURIComponent(LINE_ID)}/?${encodeURIComponent(text)}`}
-                target="_blank"
-                rel="noreferrer"
+              <button
+                type="button"
                 className={styles.lineBtn}
+                onClick={() =>
+                  void openExternal(
+                    `https://line.me/R/oaMessage/${encodeURIComponent(LINE_ID)}/?${encodeURIComponent(text)}`,
+                  )
+                }
               >
                 ส่งรายการทาง LINE
-              </a>
-              <a href={`tel:+66${PHONE.slice(1)}`} className={styles.callBtn}>
+              </button>
+              <button
+                type="button"
+                className={styles.callBtn}
+                onClick={() => void openExternal(`tel:+66${PHONE.slice(1)}`)}
+              >
                 โทร {PHONE.replace(/(\d{3})(\d{3})(\d{3})/, "$1-$2-$3")}
-              </a>
+              </button>
               <button type="button" onClick={copyList} className={styles.copyBtn}>
                 {copied ? "คัดลอกรายการแล้ว ✓" : "คัดลอกรายการ"}
               </button>

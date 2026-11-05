@@ -192,3 +192,31 @@ svg {
 :where(p, li, dd, dt, figcaption, blockquote):lang(th) {
   font-family: var(--font-thai);
 }
+
+/* ------------------------------------------------------------ mobile shell
+   The installed app (and phones) get a bottom tab bar, so content needs room
+   for it plus the iOS home indicator. */
+@media (max-width: 720px) {
+  body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+}
+
+html[data-native="true"] body {
+  padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  overscroll-behavior-y: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* native shells should not bounce like a web page */
+html[data-native="true"] {
+  height: 100%;
+  overflow: hidden;
+}
+
+html[data-native="true"] body {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

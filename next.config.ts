@@ -1,5 +1,13 @@
 import type { NextConfig } from "next";
 
+/**
+ * Two build targets share one codebase:
+ *  - `next build`          → server build (web shop, JSON API, Drive bridge)
+ *  - `BUILD_TARGET=mobile` → static export consumed by Capacitor for the
+ *                            iOS / Android app bundles (no Node server needed)
+ */
+const isMobile = process.env.BUILD_TARGET === "mobile";
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
@@ -11,7 +19,15 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "drive.google.com" },
     ],
   },
+  ...(isMobile
+    ? {
+        output: "export" as const,
+        trailingSlash: true,
+        distDir: "out",
+      }
+    : {}),
   async headers() {
+    if (isMobile) return [];
     return [
       {
         source: "/sw.js",

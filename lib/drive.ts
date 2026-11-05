@@ -18,6 +18,9 @@
  */
 
 import { PRODUCTS, CATEGORIES, type Product, type CategorySlug } from "@/data/products";
+import { DRIVE_FOLDER_ID, driveImageUrl, driveViewUrl } from "./drive-url";
+
+export { DRIVE_FOLDER_ID, driveImageUrl, driveViewUrl };
 
 export type DriveConfig = {
   folderId: string;
@@ -25,9 +28,6 @@ export type DriveConfig = {
   folderUrl: string;
   configured: boolean;
 };
-
-export const DRIVE_FOLDER_ID =
-  process.env.GOOGLE_DRIVE_FOLDER_ID ?? "1lda7ww3UybIHobPLm6ZecWaJr4jepiCH";
 
 export function getDriveConfig(): DriveConfig {
   const apiKey = process.env.GOOGLE_DRIVE_API_KEY?.trim() || null;
@@ -37,16 +37,6 @@ export function getDriveConfig(): DriveConfig {
     folderUrl: `https://drive.google.com/drive/folders/${DRIVE_FOLDER_ID}`,
     configured: Boolean(apiKey),
   };
-}
-
-/** Public thumbnail endpoint — no API key needed, works in <img>/<Image>. */
-export function driveImageUrl(fileId: string, width = 900): string {
-  return `https://lh3.googleusercontent.com/d/${fileId}=w${width}`;
-}
-
-/** Direct-download endpoint, handy for “open original in Drive”. */
-export function driveViewUrl(fileId: string): string {
-  return `https://drive.google.com/file/d/${fileId}/view`;
 }
 
 type DriveFile = {

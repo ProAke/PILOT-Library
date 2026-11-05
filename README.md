@@ -28,6 +28,27 @@ pip install pillow numpy
 npm run images
 ```
 
+## Mobile apps (iOS & Android) + phone demo
+
+```bash
+npm run build:mobile     # static export of the app → out/
+npm run mobile:sync      # export + copy into the native shells
+npm run mobile:ios       # Xcode  (macOS)
+npm run mobile:android   # Android Studio
+npm run mobile:assets    # regenerate icon + splash sets from the logo
+npm run demo:qr          # QR code for the /demo page
+```
+
+Step-by-step (Thai): **[docs/MOBILE-BUILD.md](docs/MOBILE-BUILD.md)**
+
+- Native shells live in `ios/` (SPM, no CocoaPods needed) and `android/`
+  (Gradle), package id `com.pilotlibrary.catalogue`.
+- The app bundles the whole catalogue and its imagery, so it opens offline; it
+  can refresh photos from the Drive-backed API via `NEXT_PUBLIC_CATALOG_API`.
+- Installed app (PWA or native) gets a 5-tab bottom bar and native status bar,
+  splash screen, haptics and an Android hardware-back handler (`lib/native.ts`).
+- `/demo` shows a scannable QR + install steps for iOS and Android.
+
 ## Routes
 
 | Route | What it is |

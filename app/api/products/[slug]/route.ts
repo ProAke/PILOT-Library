@@ -3,6 +3,12 @@ import { PRODUCTS } from "@/data/products";
 import { getLiveCatalog } from "@/lib/drive";
 
 export const revalidate = 600;
+export const dynamic = "force-static";
+
+/** Required so the native (static export) bundle ships one JSON per product. */
+export function generateStaticParams() {
+  return PRODUCTS.map((p) => ({ slug: p.slug }));
+}
 
 export async function GET(
   _request: Request,
