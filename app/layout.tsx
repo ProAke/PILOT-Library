@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { CartProvider } from "@/components/cart-provider";
 import { ServiceWorker } from "@/components/service-worker";
+import { AppShell } from "@/components/app-shell";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://pilot-library.vercel.app";
 
@@ -52,7 +53,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="th">
       <body>
-        <CartProvider>{children}</CartProvider>
+        <CartProvider>
+          {children}
+          <AppShell />
+        </CartProvider>
         <ServiceWorker />
       </body>
     </html>

@@ -99,12 +99,34 @@ GOOGLE_DRIVE_API_KEY=your_api_key_here`}
               </dl>
             </section>
 
-            <section className={styles.section}>
+            <section className={styles.section} id="mobile">
               <h2>04 · แอปบน iOS &amp; Android</h2>
               <p>
-                ตัวเว็บนี้เป็น PWA — กด “เพิ่มลงหน้าจอโฮม” บน Safari หรือ Chrome
-                จะได้แอปเต็มจอที่มีไอคอน โลโก้ และเปิดใช้งานได้แม้ไม่มีสัญญาณ
-                พร้อมรายการสินค้าที่แคชไว้ล่วงหน้า
+                แคตตาล็อกชุดเดียวกันนี้ถูกแพ็กได้สามแบบ — เปิดบนเบราว์เซอร์มือถือ,
+                ติดตั้งเป็น PWA (เพิ่มลงหน้าจอโฮม) หรือบิลด์เป็นแอปเนทีฟด้วย Capacitor
+                โดยใช้โค้ดและข้อมูลสินค้าชุดเดียวกันทั้งหมด
+              </p>
+              <div className={styles.code}>
+                <p>
+                  <span className={styles.get}>npm</span> run build:mobile
+                </p>
+                <p>
+                  <span className={styles.get}>npm</span> run mobile:sync
+                </p>
+                <p>
+                  <span className={styles.get}>npm</span> run mobile:ios
+                </p>
+                <p>
+                  <span className={styles.get}>npm</span> run mobile:android
+                </p>
+              </div>
+              <p className={styles.small}>
+                Native shells: <code>ios/</code> (Xcode) และ <code>android/</code>{" "}
+                (Android Studio) · appId <code>com.pilotlibrary.catalogue</code> · ไอคอนและ
+                splash สร้างจากโลโก้ด้วย <code>npm run mobile:assets</code>
+              </p>
+              <p>
+                สำหรับเดโมบนมือถือจริง เปิด <a href="/demo">/demo</a> แล้วสแกน QR
               </p>
               <div className={styles.cats}>
                 {CATEGORIES.map((c) => (

@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 
+// Needed for the static mobile export (BUILD_TARGET=mobile).
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "PILOT Library — Aviation Goods",

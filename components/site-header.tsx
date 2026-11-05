@@ -13,6 +13,7 @@ const NAV = [
   { href: "/shop?c=accessories", label: "Women", key: "accessories" },
   { href: "/shop?c=souvenirs", label: "Objects", key: "souvenirs" },
   { href: "/journal", label: "Journal", key: "journal" },
+  { href: "/demo", label: "Demo", key: "demo" },
 ];
 
 /**
@@ -78,7 +79,9 @@ function SiteHeaderInner() {
             const isActive =
               item.key === "journal"
                 ? pathname.startsWith("/journal")
-                : pathname.startsWith("/shop") && activeCat === item.key;
+                : item.key === "demo"
+                  ? pathname.startsWith("/demo")
+                  : pathname.startsWith("/shop") && activeCat === item.key;
             return (
               <Link
                 key={item.href}
@@ -131,8 +134,13 @@ function SiteHeaderInner() {
             <span>Journal</span>
             <em>เรื่องราวการบิน</em>
           </Link>
-          <Link href="/inquiry" className={styles.mobileLink}>
+          <Link href="/demo" className={styles.mobileLink}>
             <span className="mono">06</span>
+            <span>Demo on phone</span>
+            <em>ทดลองบนมือถือจริง</em>
+          </Link>
+          <Link href="/inquiry" className={styles.mobileLink}>
+            <span className="mono">07</span>
             <span>Bag</span>
             <em>รายการที่สนใจ ({count})</em>
           </Link>

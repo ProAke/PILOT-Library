@@ -1,0 +1,241 @@
+.page {
+  padding-block: clamp(24px, 4vw, 48px) 0;
+}
+
+.head {
+  max-width: 60ch;
+  padding-bottom: clamp(22px, 3.4vw, 34px);
+}
+
+.title {
+  font-size: clamp(30px, 5vw, 46px);
+  letter-spacing: -0.03em;
+  margin-top: 6px;
+}
+
+.lead {
+  margin-top: 12px;
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(16px, 3vw, 28px);
+  align-items: start;
+}
+
+.cardTitle {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 400;
+  margin-bottom: 14px;
+}
+
+/* ------------------------------------------------------------------- QR */
+.qrCard {
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+  padding: clamp(18px, 3vw, 26px);
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.qrWrap {
+  padding: 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+/* QRCode.toCanvas writes hard-coded width/height on the element, so the
+   wrapper controls the size and the canvas simply fills it. */
+.qrBox {
+  width: min(62vw, 232px);
+  aspect-ratio: 1;
+}
+
+.qr {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.url {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  word-break: break-all;
+  text-align: center;
+  max-width: 100%;
+}
+
+.openBtn,
+.copyBtn {
+  width: 100%;
+  padding: 12px 14px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+}
+
+.openBtn {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.openBtn:hover {
+  background: #24303c;
+}
+
+.copyBtn {
+  border: 1px solid var(--line-strong);
+}
+
+.copyBtn:hover {
+  border-color: var(--ink);
+  background: var(--paper);
+}
+
+.warn {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--clay);
+  border-left: 2px solid var(--clay);
+  padding-left: 8px;
+}
+
+/* --------------------------------------------------------------- install */
+.steps {
+  border: 1px solid var(--line);
+  padding: clamp(18px, 3vw, 26px);
+}
+
+.platform {
+  padding-block: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.platform:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px 3px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.platform ol {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.platform strong {
+  color: var(--ink);
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------------- native */
+.native {
+  margin-top: clamp(26px, 4vw, 42px);
+  border-top: 1px solid var(--line);
+  padding-top: clamp(20px, 3vw, 30px);
+}
+
+.nativeLead {
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.nativeLead code {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+  padding: 1px 5px;
+}
+
+.nativeGrid {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.nativeCard {
+  border: 1px solid var(--line);
+  padding: 16px;
+  background: var(--paper);
+}
+
+.nativeCard h3 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.req {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+
+.nativeCard pre {
+  margin: 10px 0 0;
+  padding: 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.9;
+  overflow-x: auto;
+  display: grid;
+}
+
+.nativeFoot {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.nativeFoot a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 1px;
+}
+
+@media (min-width: 760px) {
+  .grid {
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+  }
+  .nativeGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
