@@ -1,0 +1,196 @@
+.buy {
+  display: grid;
+  gap: 20px;
+  padding-block: 20px 22px;
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+
+.unit {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.group {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 9px;
+}
+
+.legend {
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.chosen {
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.color {
+  width: 28px;
+  height: 28px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.color span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgb(18 24 32 / 12%);
+}
+
+.color:hover {
+  transform: scale(1.06);
+}
+
+.colorActive {
+  border-color: var(--ink);
+}
+
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.size {
+  min-width: 42px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  transition: all 0.18s var(--ease);
+}
+
+.size:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.sizeActive {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.qtyRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+}
+
+.stepper button {
+  width: 36px;
+  height: 38px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.stepper button:hover {
+  color: var(--ink);
+  background: var(--paper-deep);
+}
+
+.stepper span {
+  min-width: 34px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+
+.subtotal {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: grid;
+  gap: 8px;
+}
+
+.primary {
+  padding: 15px 18px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  letter-spacing: 0.04em;
+  transition: background 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+.primary:hover {
+  background: #24303c;
+}
+
+.secondary {
+  padding: 14px 18px;
+  border: 1px solid var(--line-strong);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  letter-spacing: 0.04em;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.secondary:hover {
+  border-color: var(--ink);
+  background: var(--paper-deep);
+}
+
+.assurance {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.assurance li {
+  display: flex;
+  gap: 8px;
+}
+
+.assurance li::before {
+  content: "—";
+  color: var(--line-strong);
+}

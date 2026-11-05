@@ -1,0 +1,186 @@
+.hero {
+  position: relative;
+  padding: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--sand) 92%, #fff) 0%,
+      var(--sand) 42%,
+      color-mix(in srgb, var(--sand-deep) 92%, #000) 100%
+    );
+}
+
+/* the banner keeps the supplied artwork's own 1600:1040 ratio, centred on a
+   warm wall — the way goods sit in the reference layout */
+.frame {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1240px;
+  padding: clamp(16px, 3vw, 30px) var(--gutter) 0;
+}
+
+/* thin brass rail, echoing the hanger rail in the reference */
+.rail {
+  position: absolute;
+  top: clamp(16px, 3vw, 30px);
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(214 180 148 / 70%) 10%,
+    rgb(232 206 178 / 90%) 50%,
+    rgb(214 180 148 / 70%) 90%,
+    transparent
+  );
+  z-index: 2;
+}
+
+.photoWrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1600 / 1040;
+  background: var(--sand-deep);
+  max-height: min(74vh, 640px);
+  margin-inline: auto;
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgb(18 12 8 / 66%) 0%, rgb(18 12 8 / 24%) 26%, transparent 54%),
+    linear-gradient(to right, rgb(18 12 8 / 24%), transparent 48%);
+}
+
+.copy {
+  position: static;
+  padding: 20px var(--gutter) 24px;
+  background: var(--sand);
+  color: var(--ink);
+  max-width: none;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 78%);
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: clamp(29px, 5vw, 54px);
+  font-weight: 400;
+  letter-spacing: -0.028em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.caption {
+  margin-top: 10px;
+  font-size: clamp(12px, 1.4vw, 14.5px);
+  color: rgb(255 255 255 / 84%);
+  letter-spacing: 0.01em;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-bottom: 5px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid rgb(255 255 255 / 55%);
+  transition: gap 0.25s var(--ease), border-color 0.2s var(--ease);
+}
+
+.cta:hover {
+  gap: 14px;
+  border-color: #fff;
+}
+
+@media (max-width: 700px) {
+  .frame {
+    padding-bottom: 0;
+  }
+  .photoWrap {
+    max-height: none;
+  }
+  .scrim {
+    background: linear-gradient(to top, rgb(18 12 8 / 30%), transparent 40%);
+  }
+  .title {
+    font-size: clamp(29px, 8.2vw, 38px);
+  }
+}
+
+@media (min-width: 701px) {
+  .copy {
+    position: absolute;
+    left: clamp(16px, 3.2vw, 44px);
+    bottom: clamp(18px, 3.4vw, 44px);
+    padding: 0;
+    background: none;
+    color: #fff;
+    max-width: min(86%, 440px);
+  }
+  .eyebrow {
+    color: rgb(255 255 255 / 78%);
+  }
+  .caption {
+    color: rgb(255 255 255 / 84%);
+  }
+  .cta {
+    border-color: rgb(255 255 255 / 55%);
+  }
+  .cta:hover {
+    border-color: #fff;
+  }
+  .photoWrap {
+    max-height: min(74vh, 640px);
+  }
+  /* the collage is busy exactly where the caption sits — lift the type */
+  .copy > * {
+    text-shadow: 0 1px 14px rgb(12 8 6 / 55%), 0 1px 2px rgb(12 8 6 / 45%);
+  }
+  .copy::before {
+    content: "";
+    position: absolute;
+    inset: -22% -18% -18% -14%;
+    background: radial-gradient(
+      ellipse at 18% 70%,
+      rgb(14 9 6 / 42%),
+      rgb(14 9 6 / 12%) 55%,
+      transparent 72%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+  .copy::before,
+  .cta {
+    text-shadow: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .frame {
+    max-width: 1180px;
+    padding-top: 34px;
+  }
+  .rail {
+    top: 34px;
+  }
+}

@@ -1,0 +1,103 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { CategoryTabs } from "@/components/category-tabs";
+import { ProductCard } from "@/components/product-card";
+import { ShopToolbar } from "@/components/shop-toolbar";
+import { CATEGORIES, PRODUCTS, type CategorySlug } from "@/data/products";
+import { getLiveCatalog } from "@/lib/drive";
+import styles from "./shop.module.css";
+
+type SearchParams = Promise<{ c?: string; sort?: string; q?: string }>;
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}): Promise<Metadata> {
+  const { c } = await searchParams;
+  const cat = CATEGORIES.find((x) => x.slug === c);
+  return {
+    title: cat ? `${cat.name} — ${cat.nameTh}` : "Shop all",
+    description: cat?.blurb ?? "สินค้าทั้งหมดของ PILOT Library",
+  };
+}
+
+const TABS = [
+  { key: "all", label: "All", href: "/shop" },
+  ...CATEGORIES.map((c) => ({ key: c.slug, label: c.name, href: `/shop?c=${c.slug}` })),
+];
+
+const SORTS = [
+  { key: "featured", label: "Featured" },
+  { key: "price-asc", label: "Price ↑" },
+  { key: "price-desc", label: "Price ↓" },
+  { key: "name", label: "A–Z" },
+] as const;
+
+export default async function ShopPage({ searchParams }: { searchParams: SearchParams }) {
+  const { c, sort = "featured" } = await searchParams;
+  const active = (CATEGORIES.some((x) => x.slug === c) ? c : "all") as CategorySlug | "all";
+  const { products } = await getLiveCatalog();
+
+  let list = active === "all" ? products : products.filter((p) => p.category === active);
+  list = [...list].sort((a, b) => {
+    if (sort === "price-asc") return (a.price ?? 1e9) - (b.price ?? 1e9);
+    if (sort === "price-desc") return (b.price ?? -1) - (a.price ?? -1);
+    if (sort === "name") return a.name.localeCompare(b.name);
+    return 0;
+  });
+
+  const category = CATEGORIES.find((x) => x.slug === active);
+
+  return (
+    <>
+      <SiteHeader />
+      <main>
+        <header className={`${styles.head} wrap`}>
+          <p className="eyebrow">{active === "all" ? "Catalogue" : category?.nameTh}</p>
+          <h1 className={styles.title}>
+            {active === "all" ? "All goods" : category?.name}
+            <span className={styles.titleCount}>({String(list.length).padStart(2, "0")})</span>
+          </h1>
+          <p className={styles.blurb}>
+            {active === "all"
+              ? "ทุกหมวดรวมไว้ที่นี่ — เสื้อผ้า กระเป๋า อุปกรณ์การบิน และของที่ระลึก"
+              : category?.blurb}
+          </p>
+        </header>
+
+        <CategoryTabs tabs={TABS} active={active} />
+        <ShopToolbar sorts={[...SORTS]} active={sort} total={list.length} />
+
+        <section className={`${styles.grid} wrap`} aria-live="polite">
+          {list.map((product, i) => (
+            <ProductCard key={product.slug} product={product} index={i} />
+          ))}
+        </section>
+
+        {list.length === 0 && (
+          <div className={`${styles.empty} wrap`}>
+            <p>ยังไม่มีสินค้าในหมวดนี้</p>
+            <Link href="/shop">ดูสินค้าทั้งหมด →</Link>
+          </div>
+        )}
+
+        <nav className={`${styles.otherCats} wrap`} aria-label="หมวดอื่น ๆ">
+          {CATEGORIES.filter((x) => x.slug !== active).map((cat) => (
+            <Link key={cat.slug} href={`/shop?c=${cat.slug}`} className={styles.otherCard}>
+              <span className="mono">{cat.slug}</span>
+              <h2>{cat.name}</h2>
+              <p>{cat.blurb}</p>
+              <span className={styles.otherArrow} aria-hidden="true">
+                →
+              </span>
+            </Link>
+          ))}
+        </nav>
+      </main>
+      <SiteFooter />
+    </>
+  );
+}

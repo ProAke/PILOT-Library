@@ -1,0 +1,50 @@
+.page {
+  padding-block: clamp(50px, 10vw, 120px);
+  max-width: 620px;
+}
+
+.title {
+  font-size: clamp(28px, 5vw, 44px);
+  letter-spacing: -0.03em;
+  margin-top: 10px;
+}
+
+.body {
+  margin-top: 14px;
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.primary,
+.secondary {
+  padding: 13px 22px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.primary:hover {
+  background: #24303c;
+}
+
+.secondary {
+  border: 1px solid var(--line-strong);
+}
+
+.secondary:hover {
+  border-color: var(--ink);
+  background: var(--paper-deep);
+}
