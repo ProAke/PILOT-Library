@@ -1,0 +1,58 @@
+.tabs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.track {
+  display: flex;
+  gap: clamp(22px, 4vw, 46px);
+  overflow-x: auto;
+  padding-inline: var(--gutter);
+  scroll-snap-type: x proximity;
+}
+
+.tab {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 17px 2px 15px;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  letter-spacing: 0.035em;
+  color: var(--ink-faint);
+  scroll-snap-align: center;
+  transition: color 0.2s var(--ease);
+  white-space: nowrap;
+}
+
+.tab:hover {
+  color: var(--ink-soft);
+}
+
+.active {
+  color: var(--ink);
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--ink);
+  animation: grow 0.35s var(--ease);
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0.3);
+    opacity: 0.4;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}

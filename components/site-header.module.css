@@ -1,0 +1,280 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+
+.condensed {
+  border-bottom-color: var(--line);
+  background: color-mix(in srgb, var(--paper) 97%, transparent);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 3vw, 42px);
+  height: var(--header-h);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  line-height: 1;
+  padding-block: 8px;
+  margin-right: auto;
+}
+
+.wordmark {
+  width: clamp(112px, 13vw, 148px);
+  height: auto;
+  filter: contrast(1.05);
+}
+
+.brandSub {
+  font-family: var(--font-display);
+  font-size: 8px;
+  letter-spacing: 0.62em;
+  text-indent: 0.62em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 34px);
+}
+
+.navLink {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  letter-spacing: 0.045em;
+  color: var(--ink-soft);
+  padding-block: 6px;
+  transition: color 0.2s var(--ease);
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s var(--ease);
+}
+
+.navLink:hover {
+  color: var(--ink);
+}
+
+.navLink:hover::after,
+.navLinkActive::after {
+  transform: scaleX(1);
+}
+
+.navLinkActive {
+  color: var(--ink);
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 2px;
+  position: relative;
+  transition: color 0.2s var(--ease);
+}
+
+.tool:hover {
+  color: var(--ink);
+}
+
+.toolLabel {
+  display: none;
+}
+
+.divider {
+  width: 1px;
+  height: 14px;
+  background: var(--line-strong);
+  display: none;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: -8px;
+  min-width: 15px;
+  height: 15px;
+  padding-inline: 3px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 15px;
+  text-align: center;
+}
+
+.menuBtn {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  margin-left: 4px;
+}
+
+.burger,
+.burgerOpen {
+  position: relative;
+  width: 17px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.25s var(--ease);
+}
+
+.burger::before,
+.burger::after,
+.burgerOpen::before,
+.burgerOpen::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 17px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.25s var(--ease), opacity 0.2s var(--ease);
+}
+
+.burger::before {
+  top: -5.5px;
+}
+.burger::after {
+  top: 5.5px;
+}
+
+.burgerOpen {
+  background: transparent;
+}
+
+.burgerOpen::before {
+  transform: translateY(5.5px) rotate(45deg);
+}
+.burgerOpen::after {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+/* ------------------------------------------------------------- mobile sheet */
+.mobileSheet {
+  position: fixed;
+  inset: var(--header-h) 0 0;
+  background: var(--paper);
+  padding: 18px var(--gutter) 40px;
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease), transform 0.3s var(--ease);
+  overflow-y: auto;
+}
+
+.mobileSheetOpen {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.mobileLink {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  align-items: baseline;
+  gap: 2px 8px;
+  padding: 16px 2px;
+  border-bottom: 1px solid var(--line);
+}
+
+.mobileLink span:first-of-type {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+.mobileLink span:nth-of-type(2) {
+  font-family: var(--font-display);
+  font-size: 21px;
+  letter-spacing: -0.01em;
+}
+
+.mobileLink em {
+  grid-column: 2;
+  font-style: normal;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+.mobileFoot {
+  margin-top: 26px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.9;
+}
+
+@media (min-width: 720px) {
+  .divider {
+    display: block;
+  }
+  .menuBtn {
+    display: none;
+  }
+  .toolLabel {
+    display: inline;
+  }
+}
+
+@media (min-width: 960px) {
+  .header {
+    --header-h: 74px;
+  }
+  .nav {
+    display: flex;
+  }
+  .brand {
+    align-items: flex-start;
+  }
+  .brandSub {
+    align-self: center;
+  }
+  .mobileSheet {
+    display: none;
+  }
+  .tools {
+    gap: 16px;
+    font-size: 13px;
+  }
+}

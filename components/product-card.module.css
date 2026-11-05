@@ -1,0 +1,155 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: rise 0.5s var(--ease) forwards;
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.media {
+  position: relative;
+  display: block;
+  background: #f3f1ed;
+  overflow: hidden;
+}
+
+.tile {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s var(--ease), transform 0.7s var(--ease);
+}
+
+.imgSecond {
+  opacity: 0;
+}
+
+.imgHidden {
+  opacity: 0;
+}
+
+.imgShown {
+  opacity: 1;
+}
+
+.media:hover .img {
+  transform: scale(1.025);
+}
+
+.tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 8px 3px;
+  background: color-mix(in srgb, var(--ink) 88%, transparent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.quick {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  padding: 11px 10px 10px;
+  background: color-mix(in srgb, var(--paper) 96%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s var(--ease), transform 0.3s var(--ease),
+    background 0.2s var(--ease);
+}
+
+.quick:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.media:hover .quick,
+.quick:focus-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.meta {
+  padding-top: 12px;
+  display: grid;
+  gap: 3px;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.name:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.price {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.swatches {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+}
+
+.swatches li {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgb(18 24 32 / 18%);
+}
+
+.swatches .more {
+  width: auto;
+  height: 12px;
+  border-radius: 0;
+  box-shadow: none;
+  background: none !important;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  line-height: 12px;
+  color: var(--ink-faint);
+}
+
+@media (hover: none) {
+  .quick {
+    opacity: 1;
+    transform: none;
+  }
+}
