@@ -11,15 +11,14 @@ export function DemoClient({ demo }: { demo: DemoTarget }) {
   const [copied, setCopied] = useState(false);
   const [origin, setOrigin] = useState(demo.url);
 
-  // Prefer the URL the visitor is actually on (sandbox preview / custom domain).
+  // The QR must always encode the URL the visitor is actually looking at —
+  // sandbox previews rotate between sessions, so the baked-in value is only a
+  // fallback for non-browser contexts.
   useEffect(() => {
-    if (typeof window !== "undefined" && window.location.origin.includes(".")) {
-      const fromEnv = new URL(demo.url);
-      if (fromEnv.hostname.endsWith("vercel.app") && !window.location.hostname.endsWith("vercel.app")) {
-        setOrigin(window.location.origin);
-      }
-    }
-  }, [demo.url]);
+    const host = window.location.hostname;
+    const real = host.includes(".") && host !== "localhost" && !/^\d+\.\d+\.\d+\.\d+$/.test(host);
+    if (real) setOrigin(window.location.origin);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
