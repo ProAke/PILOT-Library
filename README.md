@@ -28,6 +28,21 @@ pip install pillow numpy
 npm run images
 ```
 
+## Operations console (back office) — separate frontend
+
+```bash
+cd admin && npm install
+npm run dev          # http://localhost:3001 — mobile-first ops console
+```
+
+- Separate Next.js app in `admin/` (deploy as its own project, e.g. Vercel root dir `admin`)
+- Login with `ADMIN_PASSCODE`; edit price / stock / status per SKU from a phone
+- **Google Sheets inside the Drive folder is the shared database**
+  (`slug|name|price|stock|status|category|updated_at`); the storefront reads it
+  automatically (60s cache) and hides `hidden` SKUs without a redeploy
+- Without credentials the console runs in demo mode against the public catalogue API
+- Architecture, Google setup steps and runbook (Thai): **[docs/ADMIN-SYSTEM.md](docs/ADMIN-SYSTEM.md)**
+
 ## Mobile apps (iOS & Android) + phone demo
 
 ```bash

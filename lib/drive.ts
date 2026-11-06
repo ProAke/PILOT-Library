@@ -19,6 +19,7 @@
 
 import { PRODUCTS, CATEGORIES, type Product, type CategorySlug } from "@/data/products";
 import { DRIVE_FOLDER_ID, driveImageUrl, driveViewUrl } from "./drive-url";
+import { readSheetRows, sheetConfigured } from "./sheet";
 
 export { DRIVE_FOLDER_ID, driveImageUrl, driveViewUrl };
 
@@ -99,6 +100,10 @@ export type LiveProduct = Product & {
   /** true when at least one photo resolved from Drive */
   liveImages: boolean;
   updatedAt: string;
+  /** หน่วยคงเหลือจากชีตปฏิบัติการ (null = ไม่บริหารสต็อก) */
+  stock: number | null;
+  /** active = ขายอยู่ · hidden = ซ่อนจากหน้าร้านชั่วคราว */
+  status: "active" | "hidden";
 };
 
 /**
@@ -112,9 +117,12 @@ export async function getLiveCatalog(): Promise<{
   folder: DriveConfig;
   driveError: string | null;
   checkedAt: string;
+  /** ราคา/สต็อก/สถานะ อ่านจาก Google Sheets หรือจากข้อมูลที่ฝังมากับแอป */
+  dataSource: "sheet" | "bundled";
 }> {
   const folder = getDriveConfig();
   const { files, error } = await listDriveFolder();
+  const sheet = sheetConfigured() ? await readSheetRows().catch(() => null) : null;
   const byId = new Map(files.map((f) => [f.id, f]));
   const byName = new Map(files.map((f) => [f.name, f]));
 
@@ -132,20 +140,28 @@ export async function getLiveCatalog(): Promise<{
       };
     });
     if (live) anyLive = true;
+    const override = sheet?.get(product.slug);
     return {
       ...product,
       images,
       liveImages: live,
+      price: override && override.price !== null ? override.price : product.price,
+      stock: override?.stock ?? null,
+      status: override?.status ?? "active",
       updatedAt:
-        byId.get(product.images[0]?.driveId)?.modifiedTime?.slice(0, 10) ??
+        override?.updatedAt ||
+        byId.get(product.images[0]?.driveId)?.modifiedTime?.slice(0, 10) ||
         product.updatedAt,
     };
   });
 
+  const visible = products.filter((p) => p.status !== "hidden");
+
   return {
-    products,
+    products: visible,
     categories: CATEGORIES,
     source: anyLive ? "drive" : "local",
+    dataSource: sheet ? "sheet" : "bundled",
     folder,
     driveError: error,
     checkedAt: new Date().toISOString(),

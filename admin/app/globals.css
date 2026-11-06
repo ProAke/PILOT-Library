@@ -1,0 +1,336 @@
+/* PILOT OPS — แยกอัตลักษณ์จากหน้าร้านโดยสิ้นเชิง: โทนเข้มแบบห้องปฏิบัติการ */
+:root {
+  --bg: #10151c;
+  --panel: #171e27;
+  --panel-2: #1d2530;
+  --line: #2a3441;
+  --text: #e9e5dc;
+  --muted: #97a3b0;
+  --sand: #c39678;
+  --green: #7fb069;
+  --amber: #d9a441;
+  --red: #c65b4e;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: "Inter Variable", "Noto Sans Thai Variable", "Inter", "Noto Sans Thai", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+a {
+  color: var(--sand);
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+/* ------------------------------------------------------------- shell */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px calc(12px + env(safe-area-inset-top)) 14px;
+  padding-top: calc(12px + env(safe-area-inset-top));
+  background: rgba(16, 21, 28, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-family: var(--mono);
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.brand small {
+  display: block;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.modeBadge {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 8px 3px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.modeBadge.sheets {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+.modeBadge.demo {
+  color: var(--amber);
+  border-color: var(--amber);
+}
+
+.logout {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 6px 8px;
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 16px 14px 90px;
+}
+
+/* ------------------------------------------------------------- login */
+.loginWrap {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.loginCard {
+  width: min(100%, 360px);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 26px 22px;
+  display: grid;
+  gap: 14px;
+}
+
+.loginCard h1 {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 16px;
+  letter-spacing: 0.22em;
+}
+
+.loginCard p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* ------------------------------------------------------------ inputs */
+label {
+  display: grid;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+input,
+select {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 10px 10px;
+  border-radius: 0;
+  appearance: none;
+}
+
+input:focus,
+select:focus {
+  outline: 1px solid var(--sand);
+  border-color: var(--sand);
+}
+
+button.primary {
+  background: var(--sand);
+  color: #171310;
+  border: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  padding: 12px;
+  text-transform: uppercase;
+}
+
+button.primary:disabled {
+  opacity: 0.5;
+}
+
+button.ghost {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 10px;
+}
+
+/* --------------------------------------------------------- dashboard */
+.toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.toolbar input {
+  flex: 1;
+}
+
+.count {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.cards {
+  display: grid;
+  gap: 10px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.cardHead {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.cardHead h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  flex: 1;
+}
+
+.chip {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 6px 2px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.chip.hidden {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.slug {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 8px;
+}
+
+.cardFoot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardFoot .state {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.cardFoot .state.ok {
+  color: var(--green);
+}
+
+.cardFoot .state.err {
+  color: var(--red);
+}
+
+.cardFoot button {
+  margin-left: auto;
+  min-width: 96px;
+}
+
+/* --------------------------------------------------------- ops links */
+.opsGrid {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.opsRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.opsRow .mono {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.note {
+  margin-top: 16px;
+  border-left: 2px solid var(--amber);
+  padding: 8px 12px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.note.green {
+  border-color: var(--green);
+}
+
+@media (min-width: 720px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
