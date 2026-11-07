@@ -56,6 +56,12 @@ npm run demo:qr          # QR code for the /demo page
 
 Step-by-step (Thai): **[docs/MOBILE-BUILD.md](docs/MOBILE-BUILD.md)**
 
+### Installable APK (developer build, JDK 21)
+- CI: Actions → **build-android** → Run workflow → APK artifact + release `dev-apk`
+  (Temurin JDK 21 + Gradle + Android SDK run on the GitHub runner)
+- Local: JDK 21 + Android SDK แล้ว `npm run mobile:apk` / `npm run mobile:apk:install`
+- Thai guide: **[docs/INSTALL-DEVELOPER.md](docs/INSTALL-DEVELOPER.md)**
+
 - Native shells live in `ios/` (SPM, no CocoaPods needed) and `android/`
   (Gradle), package id `com.pilotlibrary.catalogue`.
 - The app bundles the whole catalogue and its imagery, so it opens offline; it
